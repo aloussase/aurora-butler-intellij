@@ -31,6 +31,11 @@
                 id="io.github.aloussase.aurorabutler.AppSettingsConfigurable"
                 displayName="Aurora Butler"
         />
+        <toolWindow
+                factoryClass="io.github.aloussase.aurorabutler.ConfigurationVariablesToolWindowFactory"
+                id="Aurora Variables"
+                anchor="right"
+        />
     </extensions>
     <actions>
         <action id="io.github.aloussase.aurorabutler.PopupDialogAction"
