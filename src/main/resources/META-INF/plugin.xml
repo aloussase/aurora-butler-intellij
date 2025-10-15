@@ -36,6 +36,7 @@
                 id="Aurora Variables"
                 anchor="right"
         />
+        <notificationGroup displayType="BALLOON" id="AuroraButlerNotifications"/>
     </extensions>
     <actions>
         <action id="io.github.aloussase.aurorabutler.PopupDialogAction"

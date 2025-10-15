@@ -23,8 +23,6 @@ class AuroraService {
         val deploymentId = state.deploymentId ?: return emptyList()
         val environment = state.environment ?: return emptyList()
 
-        println(state)
-
         val requestBody = """
             {
                 "query": {
@@ -68,7 +66,6 @@ class AuroraService {
 
         response.body.byteStream().use { inputStream ->
             val rootNode = ObjectMapper().readTree(inputStream)
-            println(rootNode)
             return rootNode["entities"]
                 .map {
                     ConfigurationVariable(
