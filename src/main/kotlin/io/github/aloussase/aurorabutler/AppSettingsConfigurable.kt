@@ -32,7 +32,7 @@ class AppSettingsConfigurable : Configurable {
         AppSettings.getInstance().state?.let {
             it.apiBaseUrl = mAppSettingsComponent?.getApiBaseUrl()
             it.authToken = mAppSettingsComponent?.getAuthTokenText()
-            it.bluePrintName = mAppSettingsComponent?.getEnvironmentText()
+            it.bluePrintName = mAppSettingsComponent?.getBluePrintNameText()
             it.deploymentId = mAppSettingsComponent?.getDeploymentIdText()
             it.environment = mAppSettingsComponent?.getEnvironmentText()
         }
