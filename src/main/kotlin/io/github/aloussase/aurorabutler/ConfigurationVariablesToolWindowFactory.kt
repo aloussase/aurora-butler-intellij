@@ -18,24 +18,62 @@ import javax.swing.table.DefaultTableModel
 
 class ConfigurationVariablesToolWindowFactory : ToolWindowFactory, DumbAware {
 
+    private var configurationVariables: List<ConfigurationVariable> = emptyList()
+    private var visibleConfigurationVariables = emptyList<ConfigurationVariable>()
+
+    private lateinit var table: JBTable
+    private lateinit var tableModel: DefaultTableModel
+
+    private fun applySearchFilter(filter: String) {
+        visibleConfigurationVariables = configurationVariables
+            .filter {
+                it.name.contains(filter, ignoreCase = true)
+                        || it.value.contains(filter, ignoreCase = true)
+
+            }
+
+        invokeLater {
+            tableModel.rowCount = 0
+            for (variable in visibleConfigurationVariables) {
+                tableModel.addRow(arrayOf(variable.name, variable.value))
+            }
+        }
+    }
+
     override fun createToolWindowContent(
         project: Project,
         toolWindow: ToolWindow
     ) {
-        val tableModel = DefaultTableModel(
+        tableModel = object : DefaultTableModel(
             arrayOf("Name", "Value"),
             0
-        )
+        ) {
+            override fun isCellEditable(row: Int, column: Int): Boolean {
+                return false
+            }
+        }
 
-        val table = JBTable(tableModel)
-
+        table = JBTable(tableModel)
 
         val panel: DialogPanel = panel {
+            row {
+                textField()
+                    .applyToComponent { emptyText.text = "Search for variables..." }
+                    .align(Align.FILL)
+                    .resizableColumn()
+                    .onChanged { applySearchFilter(it.text) }
+
+                button("Refresh") {}
+            }
+
+            separator()
+
             row {
                 scrollCell(table)
                     .resizableColumn()
                     .align(Align.FILL)
-            }.resizableRow()
+            }
+                .resizableRow()
         }
 
         val content = ContentFactory.getInstance().createContent(panel, "Aurora Configuration Variables", false)
@@ -44,10 +82,16 @@ class ConfigurationVariablesToolWindowFactory : ToolWindowFactory, DumbAware {
             it.contentManager.addContent(content)
         }
 
+        invokeLater {
+            table.requestFocusInWindow()
+        }
+
         ProgressManager.getInstance().run(object : Task.Backgroundable(project, "Loading configuration variables") {
             override fun run(p0: ProgressIndicator) {
                 val auroraService = service<AuroraService>()
-                val configurationVariables = auroraService.fetchConfigurationVariables()
+
+                configurationVariables = auroraService.fetchConfigurationVariables()
+                visibleConfigurationVariables = configurationVariables
 
                 invokeLater {
                     for (variable in configurationVariables) {
