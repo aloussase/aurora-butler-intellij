@@ -5,16 +5,25 @@
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Aurorabutler</name>
+    <name>Aurora Butler</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor url="https://github.com/aloussase">aloussase</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    <p>
+        Aurora Butler is a plugin that allows you to interact with the Aurora <em>(now ANDES)</em> API.
+    </p>
+    <p>
+        It allows you to:
+    </p>
+    <ul>
+        <li>Configure different environments</li>
+        <li>Open a tool window to see variables defined in your current environment</li>
+        <li>Search among these variables for the one you are looking for</li>
+    </ul>
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.
