@@ -44,14 +44,8 @@
                 factoryClass="io.github.aloussase.aurorabutler.ConfigurationVariablesToolWindowFactory"
                 id="Aurora Variables"
                 anchor="right"
+                icon="/icons/aurora.svg"
         />
         <notificationGroup displayType="BALLOON" id="AuroraButlerNotifications"/>
     </extensions>
-    <actions>
-        <action id="io.github.aloussase.aurorabutler.PopupDialogAction"
-                class="io.github.aloussase.aurorabutler.PopupDialogAction" text="Pop Dialog Action"
-                description="SDK action example">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
-    </actions>
 </idea-plugin>
